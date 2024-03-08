@@ -1,12 +1,14 @@
 import React from 'react';
 import Carousel from './Carousel';
-import {View} from 'react-native';
+import Guess from './Guess';
+import {ScrollView} from 'react-native';
 
 function Home({navigation}) {
   return (
-    <View>
+    <ScrollView style={{backgroundColor: 'rgba(0, 0, 0, .08)'}}>
       <Carousel />
-    </View>
+      <Guess />
+    </ScrollView>
   );
 }
 
