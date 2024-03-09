@@ -45,9 +45,13 @@ function Navigator() {
         <RootStack.Screen
           name="BottomTabs"
           component={BottomTabs}
-          options={({route}) => ({
-            headerTitle: getHeaderTitle(route),
-          })}
+          options={({route}) => {
+            const title = getHeaderTitle(route);
+            return {
+              headerTitle: title,
+              headerShown: title === '首页' ? false : true,
+            };
+          }}
         />
         <RootStack.Screen name="Detail" component={Detail} />
       </RootStack.Navigator>

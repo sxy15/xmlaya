@@ -59,9 +59,7 @@ function Guess() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     borderRadius: 8,
-    margin: 16,
   },
   item: {
     flex: 1,

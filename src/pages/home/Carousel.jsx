@@ -6,7 +6,7 @@ import useStore from '@/store';
 
 const sliderWidth = viewportWidth;
 const slideWidth = wp(90);
-const slideHeight = hp(20);
+export const slideHeight = hp(20);
 const itemWidth = slideWidth + wp(2) * 2;
 
 function Dots({activeSlide, len}) {
@@ -28,9 +28,11 @@ function Dots({activeSlide, len}) {
 function Carrousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const data = useStore(state => state.carouselList);
+  const changeCarouseIndex = useStore(state => state.changeCarouseIndex);
 
   const handleSnapToItem = index => {
     setActiveSlide(index);
+    changeCarouseIndex(index);
   };
 
   return (
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   image: {
     width: itemWidth,
     height: slideHeight,
-    resizeMode: 'cover',
+    resizeMode: 'center',
   },
   paginationWrapper: {
     justifyContent: 'center',
