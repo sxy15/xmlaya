@@ -35,7 +35,6 @@ function HomeTabs() {
         tabBarInactiveTintColor: '#333',
       }}>
       <Tab.Screen name="Home" component={Home} options={{title: '推荐'}} />
-      <Tab.Screen name="Home2" component={Home} options={{title: '推荐'}} />
     </Tab.Navigator>
   );
 }

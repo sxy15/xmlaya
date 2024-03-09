@@ -10,6 +10,7 @@ import Detail from '@pages/Detail';
 import {Platform, StatusBar} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {HEAD_TITLE} from '@constants/index';
+import Category from '@pages/category';
 
 const RootStack = createStackNavigator();
 
@@ -32,7 +33,6 @@ function Navigator() {
           gestureDirection: 'horizontal',
           headerStatusBarHeight: StatusBar.currentHeight,
           headerStyle: {
-            backgroundColor: '#f4511e',
             ...Platform.select({
               android: {
                 elevation: 0,
@@ -52,6 +52,11 @@ function Navigator() {
               headerShown: title === '首页' ? false : true,
             };
           }}
+        />
+        <RootStack.Screen
+          name="Category"
+          component={Category}
+          options={{headerTitle: '分类'}}
         />
         <RootStack.Screen name="Detail" component={Detail} />
       </RootStack.Navigator>

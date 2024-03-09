@@ -10,6 +10,7 @@ import {MaterialTopTabBar} from '@react-navigation/material-top-tabs';
 import LinearGradientTransition from 'react-native-linear-animated-gradient-transition';
 import useStore from '@/store';
 import {CarouselColors} from '@/mock/carousel';
+import {useNavigation} from '@react-navigation/native';
 
 function goHistory() {}
 
@@ -18,6 +19,11 @@ function TopTabBar(props) {
   const gradientVisible = useStore(state => state.gradientVisible);
 
   const textStyle = gradientVisible ? styles.text : styles.blackText;
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Category');
+  };
 
   return (
     <View style={styles.container}>
@@ -30,7 +36,7 @@ function TopTabBar(props) {
       />
       <View style={styles.topView}>
         <MaterialTopTabBar {...props} style={styles.tab} />
-        <TouchableOpacity style={styles.categoryBtn}>
+        <TouchableOpacity style={styles.categoryBtn} onPress={handlePress}>
           <Text>分类</Text>
         </TouchableOpacity>
       </View>
