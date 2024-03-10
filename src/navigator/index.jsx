@@ -1,16 +1,16 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useRoute} from '@react-navigation/native';
 import {
   CardStyleInterpolators,
   HeaderStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
 import BottomTabs from './BottomTabs';
-import Detail from '@pages/Detail';
-import {Platform, StatusBar} from 'react-native';
+import {Animated, Platform, StatusBar, StyleSheet} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {HEAD_TITLE} from '@constants/index';
 import Category from '@pages/category';
+import Channel from '@pages/channel';
 
 const RootStack = createStackNavigator();
 
@@ -58,10 +58,33 @@ function Navigator() {
           component={Category}
           options={{headerTitle: '分类'}}
         />
-        <RootStack.Screen name="Detail" component={Detail} />
+        <RootStack.Screen
+          name="Channel"
+          component={Channel}
+          options={({route}) => {
+            return {
+              headerTitle: route.params.title,
+              headerTransparent: true,
+              headerTitleStyle: {
+                opacity: 0,
+              },
+              headerBackground: () => (
+                <Animated.View style={styles.headerBackground} />
+              ),
+            };
+          }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  headerBackground: {
+    flex: 1,
+    backgroundColor: '#fff',
+    opacity: 0,
+  },
+});
 
 export default Navigator;

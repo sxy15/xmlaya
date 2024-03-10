@@ -13,14 +13,14 @@ const useStore = create(set => ({
   gradientVisible: true,
   guessList: GuessData.slice(0, 6),
   channelList: ChannelData,
-  myCategory: [],
+  myCategory: CategoryData.filter(item => MyIds.includes(item.id)),
   otherCategory: OtherIds,
   cacheIds: [],
   initMyCategory: async () => {
     const localCategory = await AsyncStorage.getItem('categoryIds');
     const ids = localCategory ? JSON.parse(localCategory) : MyIds;
     set(() => ({
-      myCategory: ids,
+      myCategory: CategoryData.filter(item => ids.includes(item.id)),
       cacheIds: ids,
     }));
   },

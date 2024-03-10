@@ -2,10 +2,12 @@ import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Home from '../pages/home';
 import TopTabBar from '@pages/home/TopTabBar';
+import useStore from '@/store';
 
 const Tab = createMaterialTopTabNavigator();
 
 function HomeTabs() {
+  const myCategory = useStore(state => state.myCategory);
   return (
     <Tab.Navigator
       tabBar={props => <TopTabBar {...props} />}
@@ -34,7 +36,16 @@ function HomeTabs() {
         tabBarActiveTintColor: 'green',
         tabBarInactiveTintColor: '#333',
       }}>
-      <Tab.Screen name="Home" component={Home} options={{title: '推荐'}} />
+      {myCategory.map(item => {
+        return (
+          <Tab.Screen
+            key={item.id}
+            name={item.id}
+            component={Home}
+            options={{title: item.name}}
+          />
+        );
+      })}
     </Tab.Navigator>
   );
 }

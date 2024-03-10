@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import useStore from '@/store';
 import {IconHuanyipi, IconMore, IconXihuan} from '@assets/iconfont';
+import {useNavigation} from '@react-navigation/native';
 
-function GuessItem({item}) {
+function GuessItem({item, navigation}) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       style={styles.item}
-      onPress={() => alert('点击')}>
+      onPress={() => navigation.navigate('Channel', {item})}>
       <Image source={item.image} style={styles.image} />
       <Text style={styles.name} numberOfLines={2}>
         {item.title}
@@ -27,6 +28,7 @@ function GuessItem({item}) {
 function Guess() {
   const guessList = useStore(state => state.guessList);
   const changeGuessList = useStore(state => state.changeGuessList);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -44,7 +46,9 @@ function Guess() {
         style={styles.list}
         numColumns={3}
         data={guessList}
-        renderItem={GuessItem}
+        renderItem={({item}) => (
+          <GuessItem item={item} navigation={navigation} />
+        )}
       />
       <TouchableOpacity
         activeOpacity={0.7}
